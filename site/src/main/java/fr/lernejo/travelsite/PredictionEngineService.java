@@ -1,9 +1,11 @@
 package fr.lernejo.travelsite;
 
+import fr.lernejo.prediction.TemperaturePrediction;
+import fr.lernejo.travelsite.exception.ServerNotFoundException;
 import retrofit2.Call;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.io.IOException;
 
 @Service
 public class PredictionEngineService {
@@ -13,8 +15,13 @@ public class PredictionEngineService {
         this.predictionEngineClient = predictionEngineClient;
     }
 
-    public Call<List<Country>> getTemperaturePrediction(String country) {
-        return predictionEngineClient.getTemperaturePrediction(country);
+    public TemperaturePrediction getTemperaturePrediction(String country) {
+        Call<TemperaturePrediction> retrofitCall = predictionEngineClient.getTemperaturePrediction(country);
+        try {
+            return retrofitCall.execute().body();
+        } catch (IOException e) {
+            throw new ServerNotFoundException(e.getMessage());
+        }
     }
 
 }

@@ -24,4 +24,11 @@ public class PredictionEngineService {
         }
     }
 
+    public Country getCountryPrediction(String country) {
+        TemperaturePrediction prediction = getTemperaturePrediction(country);
+        Double temperature = (prediction.temperatures().get(0).temperature()
+            +prediction.temperatures().get(1).temperature())
+            /2;
+        return new Country(country,temperature);
+    }
 }

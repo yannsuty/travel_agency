@@ -1,7 +1,7 @@
 package fr.lernejo.travelsite;
 
 import org.springframework.http.MediaType;
-import fr.lernejo.prediction.TemperaturePrediction;
+import fr.lernejo.travelsite.prediction.TemperaturePrediction;
 import fr.lernejo.travelsite.exception.CannotReadCountryFile;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;

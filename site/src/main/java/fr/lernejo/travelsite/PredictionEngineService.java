@@ -1,6 +1,6 @@
 package fr.lernejo.travelsite;
 
-import fr.lernejo.prediction.TemperaturePrediction;
+import fr.lernejo.travelsite.prediction.TemperaturePrediction;
 import fr.lernejo.travelsite.exception.ServerNotFoundException;
 import retrofit2.Call;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
 package fr.lernejo.travelsite;
 
-import fr.lernejo.prediction.TemperaturePrediction;
+import fr.lernejo.travelsite.prediction.TemperaturePrediction;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

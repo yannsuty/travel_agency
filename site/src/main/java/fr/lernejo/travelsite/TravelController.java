@@ -1,6 +1,5 @@
 package fr.lernejo.travelsite;
 
-import org.springframework.http.MediaType;
 import fr.lernejo.travelsite.prediction.TemperaturePrediction;
 import fr.lernejo.travelsite.exception.CannotReadCountryFile;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,14 +33,14 @@ public class TravelController {
         }
     }
 
-    @GetMapping(value="/api/travels", produces=MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value="/api/travels")
     @ResponseBody
-    public List<Country> getTravels(@RequestParam String userName) {
-        List<Country> travels = new ArrayList<>();
+    public List<Travel> getTravels(@RequestParam String userName) {
+        List<Travel> travels = new ArrayList<>();
         User user = userRepository.findUser(userName);
         Double userTemperature = predictionEngineService.getCountryPrediction(user.userCountry()).temperature();
         for(String country: country_liste) {
-            Country prediction = predictionEngineService.getCountryPrediction(country);
+            Travel prediction = predictionEngineService.getCountryPrediction(country);
             if (user.weatherExpectation().equals(User.WeatherExpectation.WARMER) && prediction.temperature() > userTemperature+user.minimumTemperatureDistance())
                 travels.add(prediction);
             else if (user.weatherExpectation().equals(User.WeatherExpectation.COLDER) && prediction.temperature() < userTemperature-user.minimumTemperatureDistance())

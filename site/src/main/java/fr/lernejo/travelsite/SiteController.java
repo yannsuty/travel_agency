@@ -2,10 +2,7 @@ package fr.lernejo.travelsite;
 
 import fr.lernejo.travelsite.prediction.TemperaturePrediction;
 import fr.lernejo.travelsite.exception.CannotReadCountryFile;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,12 +12,17 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @RestController
-public class TravelController {
+public class SiteController {
     private final PredictionEngineService predictionEngineService;
-    private final UserRepository userRepository = UserRepository.getInstance();
+    private final UserRepository userRepository = new UserRepository();
     private final List<String> country_liste;
 
-    public TravelController(PredictionEngineService predictionEngineService) {
+    @PostMapping("/api/inscription")
+    public void inscription(@RequestBody User user) {
+        userRepository.save(user);
+    }
+
+    public SiteController(PredictionEngineService predictionEngineService) {
         this.predictionEngineService=predictionEngineService;
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("countries.txt");
         try {

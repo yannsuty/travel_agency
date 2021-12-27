@@ -6,16 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserRepository {
-    private static final UserRepository INSTANCE=new UserRepository();
-    private final List<User> userList = new ArrayList<>();
+    private final List<User> userList;
 
-    private UserRepository() {}
-
-    public static UserRepository getInstance() {
-        return INSTANCE;
+    public UserRepository() {
+        userList = new ArrayList<>();
     }
 
-    public boolean addUser(User newUser) {
+    public boolean save(User newUser) {
         userList.add(newUser);
         return true;
     }

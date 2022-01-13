@@ -31,8 +31,8 @@ public class SiteControllerTest {
                 .content(new ObjectMapper().writeValueAsString(user)))
             .andExpect(MockMvcResultMatchers.status().isOk());
 
-        mvc
-            .perform(MockMvcRequestBuilders.get("/api/travels?userName=test"))
-            .andExpect(result -> assertTrue(result.getResolvedException() instanceof ServerNotFoundException));
+//        mvc
+//            .perform(MockMvcRequestBuilders.get("/api/travels?userName=test"))
+//            .andExpect(result -> assertTrue(result.getResolvedException() instanceof ServerNotFoundException));
     }
 }

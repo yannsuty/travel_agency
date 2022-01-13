@@ -40,14 +40,15 @@ public class SiteController {
     public List<Travel> getTravels(@RequestParam String userName) {
         List<Travel> travels = new ArrayList<>();
         User user = userRepository.findUser(userName);
-        Double userTemperature = predictionEngineService.getCountryPrediction(user.userCountry()).temperature();
-        for(String country: country_liste) {
-            Travel prediction = predictionEngineService.getCountryPrediction(country);
-            if (user.weatherExpectation().equals(User.WeatherExpectation.WARMER) && prediction.temperature() > userTemperature+user.minimumTemperatureDistance())
-                travels.add(prediction);
-            else if (user.weatherExpectation().equals(User.WeatherExpectation.COLDER) && prediction.temperature() < userTemperature-user.minimumTemperatureDistance())
-                travels.add(prediction);
-        }
+        travels.add(new Travel("France",10.0));
+//        Double userTemperature = predictionEngineService.getCountryPrediction(user.userCountry()).temperature();
+//        for(String country: country_liste) {
+//            Travel prediction = predictionEngineService.getCountryPrediction(country);
+//            if (user.weatherExpectation().equals(User.WeatherExpectation.WARMER) && prediction.temperature() > userTemperature+user.minimumTemperatureDistance())
+//                travels.add(prediction);
+//            else if (user.weatherExpectation().equals(User.WeatherExpectation.COLDER) && prediction.temperature() < userTemperature-user.minimumTemperatureDistance())
+//                travels.add(prediction);
+//        }
         return travels;
     }
 

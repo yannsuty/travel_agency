@@ -18,8 +18,10 @@ public class PredictionEngineService {
     public TemperaturePrediction getTemperaturePrediction(String country) {
         Call<TemperaturePrediction> retrofitCall = predictionEngineClient.getTemperaturePrediction(country);
         try {
-            return retrofitCall.execute().body();
-        } catch (IOException e) {
+            TemperaturePrediction temperaturePrediction = retrofitCall.execute().body();
+            temperaturePrediction.temperatures();
+            return temperaturePrediction;
+        } catch (IOException | NullPointerException e) {
             throw new ServerNotFoundException(e.getMessage());
         }
     }
